@@ -1,3 +1,3 @@
 import './js/menu-item.js';
-import './js/tag-list-item';
+import './js/theme-switch';
 import './sass/main.scss';
