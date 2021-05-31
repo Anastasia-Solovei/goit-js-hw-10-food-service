@@ -10,30 +10,28 @@ bodyEl.classList.add(`${Theme.LIGHT}`);
 
 themeSwitcherEl.addEventListener('change', onThemeSwitcherChange);
 
+populateSwitcher();
+
 function onThemeSwitcherChange(evt) {
-  evt.preventDefault();
-  console.log(evt.target.nodeName);
+  const checked = evt.target.checked;
 
-  // if (evt.target.nodeName !== 'IMG') {
-  //   return;
-  // }
+  if (checked) {
+    bodyEl.classList.replace(`${Theme.LIGHT}`, `${Theme.DARK}`);
 
-  // const checked = evt.target.checked;
-  // console.log(checked);
+    localStorage.setItem('checked', checked);
+  }
 
-  // if (checked) {
-  //   // bodyEl.classList.replace(`${Theme.LIGHT}`, `${Theme.DARK}`);
+  if (!checked) {
+    bodyEl.classList.replace(`${Theme.DARK}`, `${Theme.LIGHT}`);
 
-  //   localStorage.setItem(
-  //     'checked',
-  //     bodyEl.classList.replace(`${Theme.LIGHT}`, `${Theme.DARK}`),
-  //   );
-  // }
+    localStorage.removeItem('checked');
+  }
+}
 
-  // if (!checked) {
-  //   localStorage.setItem(
-  //     'checked',
-  //     bodyEl.classList.replace(`${Theme.DARK}`, `${Theme.LIGHT}`),
-  //   );
-  // }
+function populateSwitcher() {
+  const activeSwitcher = localStorage.getItem('checked');
+
+  if (activeSwitcher) {
+    bodyEl.classList.add(`${Theme.DARK}`);
+  }
 }
