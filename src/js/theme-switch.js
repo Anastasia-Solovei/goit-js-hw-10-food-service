@@ -6,10 +6,12 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
+const STORAGE_KEY = 'checked';
+
 bodyEl.classList.add(
-  localStorage.getItem('checked') === null
+  localStorage.getItem(STORAGE_KEY) === null
     ? Theme.LIGHT
-    : localStorage.getItem('checked'),
+    : localStorage.getItem(STORAGE_KEY),
 );
 
 if (bodyEl.classList.value === Theme.DARK) {
@@ -19,13 +21,13 @@ if (bodyEl.classList.value === Theme.DARK) {
 function onThemeSwitcherChange(evt) {
   if (evt.target.checked) {
     bodyEl.classList.replace(Theme.LIGHT, Theme.DARK);
-    localStorage.setItem('checked', Theme.DARK);
+    localStorage.setItem(STORAGE_KEY, Theme.DARK);
 
     return;
   }
 
   bodyEl.classList.replace(Theme.DARK, Theme.LIGHT);
-  localStorage.setItem('checked', Theme.LIGHT);
+  localStorage.setItem(STORAGE_KEY, Theme.LIGHT);
 }
 
 themeSwitcherEl.addEventListener('change', onThemeSwitcherChange);
