@@ -6,32 +6,26 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
-bodyEl.classList.add(`${Theme.LIGHT}`);
+bodyEl.classList.add(
+  localStorage.getItem('checked') === null
+    ? Theme.LIGHT
+    : localStorage.getItem('checked'),
+);
 
-themeSwitcherEl.addEventListener('change', onThemeSwitcherChange);
-
-populateSwitcher();
+if (bodyEl.classList.value === Theme.DARK) {
+  themeSwitcherEl.checked = true;
+}
 
 function onThemeSwitcherChange(evt) {
-  const checked = evt.target.checked;
+  if (evt.target.checked) {
+    bodyEl.classList.replace(Theme.LIGHT, Theme.DARK);
+    localStorage.setItem('checked', Theme.DARK);
 
-  if (checked) {
-    bodyEl.classList.replace(`${Theme.LIGHT}`, `${Theme.DARK}`);
-
-    localStorage.setItem('checked', checked);
+    return;
   }
 
-  if (!checked) {
-    bodyEl.classList.replace(`${Theme.DARK}`, `${Theme.LIGHT}`);
-
-    localStorage.removeItem('checked');
-  }
+  bodyEl.classList.replace(Theme.DARK, Theme.LIGHT);
+  localStorage.setItem('checked', Theme.LIGHT);
 }
 
-function populateSwitcher() {
-  const activeSwitcher = localStorage.getItem('checked');
-
-  if (activeSwitcher) {
-    bodyEl.classList.add(`${Theme.DARK}`);
-  }
-}
+themeSwitcherEl.addEventListener('change', onThemeSwitcherChange);
