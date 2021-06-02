@@ -8,13 +8,9 @@ const Theme = {
 
 const STORAGE_KEY = 'checked';
 
-bodyEl.classList.add(
-  localStorage.getItem(STORAGE_KEY) === null
-    ? Theme.LIGHT
-    : localStorage.getItem(STORAGE_KEY),
-);
+bodyEl.classList.add(localStorage.getItem(STORAGE_KEY) || Theme.LIGHT);
 
-if (bodyEl.classList.value === Theme.DARK) {
+if (localStorage.getItem(STORAGE_KEY) === Theme.DARK) {
   themeSwitcherEl.checked = true;
 }
 
